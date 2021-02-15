@@ -35,15 +35,15 @@ jobs:
       - name: Prepare geo*dat
         if: ${{ matrix.os!='windows-latest' }}
         run: |
-          mkdir release
-          wget -O ./release/geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
-          wget -O ./release/geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
+          mkdir resources
+          wget -O ./resources/geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
+          wget -O ./resources/geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
       - name: Prepare geo*dat for Windows
         if: ${{ matrix.os=='windows-latest' }}
         run: |
-          mkdir release
-          Invoke-WebRequest -Uri "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat" -OutFile "./release/geoip.dat"
-          Invoke-WebRequest -Uri "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat" -OutFile "./release/geosite.dat"
+          mkdir resources
+          Invoke-WebRequest -Uri "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat" -OutFile "./resources/geoip.dat"
+          Invoke-WebRequest -Uri "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat" -OutFile "./resources/geosite.dat"
 
       - name: Test
         run: go test -timeout 1h -v ./...
